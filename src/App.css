@@ -1,4 +1,41 @@
-.App {
+body{
+  width: 100%;
+  background-color: whitesmoke
+}
+.header{
+  text-align: center;
+  /* color: blue */
+}
+.table{
+  
+  margin-left: 0px;
+  margin-top: 50px;
+}
+.form{
+  margin-top: 50px;
+  padding: 10px;
+  
+}
+.warning{
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .App {
   text-align: center;
 }
 
@@ -19,4 +56,4 @@
 
 .App-link {
   color: #09d3ac;
-}
+} */
