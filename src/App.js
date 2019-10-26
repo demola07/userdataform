@@ -7,6 +7,9 @@ import UserForm from './components/UserForm';
 import UserTable from './components/UserTable';
 import EditUserForm from './components/EditUserForm';
 
+import { Provider } from 'react-redux'
+import store from './store'
+
 const App = () => {
 
   //Data
@@ -22,10 +25,10 @@ const App = () => {
 
   //CRUD operations
   //Create User
-  const addUser = (user) => {
-    user.id = users.length + 1;
-    setUsers([...users, user]);
-  };
+  // const addUser = (user) => {
+  //   user.id = users.length + 1;
+  //   setUsers([...users, user]);
+  // };
 
   //Delete User
   const deleteUser = id => {
@@ -46,32 +49,35 @@ const App = () => {
   }
 
   return (
-    <Container fluid >
-      <Row className='row'>
-        {
-          editing ? (
-            <Fragment>
-              <Col xs={4} className='form' >
-                <EditUserForm editing={editing} setEditing={setEditing} currentUser={currentUser} updateUser={updateUser}></EditUserForm>
-              </Col>
-            </Fragment>
-
-          ) :
-            (
+    <Provider store={store}>
+      <Container fluid >
+        <Row className='row'>
+          {
+            editing ? (
               <Fragment>
                 <Col xs={4} className='form' >
-                  <UserForm addUser={addUser}></UserForm>
+                  <EditUserForm editing={editing} setEditing={setEditing} currentUser={currentUser} updateUser={updateUser}></EditUserForm>
                 </Col>
               </Fragment>
 
-            )
-        }
+            ) :
+              (
+                <Fragment>
+                  <Col xs={4} className='form' >
+                    <UserForm ></UserForm>
+                  </Col>
+                </Fragment>
 
-        <Col xs={8} className='table'>
-          <UserTable users={users} deleteUser={deleteUser} editRow={editRow}></UserTable>
-        </Col>
-      </Row>
-    </Container>
+              )
+          }
+
+          <Col xs={8} className='table'>
+            <UserTable></UserTable>
+          </Col>
+        </Row>
+      </Container>
+    </Provider>
+
   );
 }
 

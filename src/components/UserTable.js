@@ -1,34 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
+import { shallowEqual, useSelector, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 
-const UserTable = (props) => {
+
+const UserTable = () => {
+    // const { state } = props
+    const state = useSelector((state) => {
+        return state.form;
+    });
+    console.log(state);
+
     return (
         <div>
             <h1 className='header'>User Data</h1>
             <Table bordered hover variant='dark'>
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
                         <th>Birthday</th>
                         <th>Age</th>
-                        <th>Hobbies</th>
+                        <th>Hobby</th>
                         <th>Action</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    {props.users.length > 0 ? (props.users.map(user => (
-                        <tr key={user.id}>
-                            <td>{user.firstname}</td>
-                            <td>{user.lastname}</td>
-                            <td>{user.birthday}</td>
-                            <td>{user.age}</td>
-                            <td>{user.hobby}</td>
-                            <td>
+                    {state.length > 0 ? (state.map(data => (
+                        <tr key={data.id}>
+                            <td>{data.firstname}</td>
+                            <td>{data.lastname}</td>
+                            <td>{data.birthday}</td>
+                            <td>{data.age}</td>
+                            <td>{data.hobby}</td>
+                            {/* <td>
                                 <Button variant="outline-primary" onClick={() => { props.editRow(user) }} className='mr-3'>Edit</Button>
                                 <Button variant="outline-danger" onClick={() => props.deleteUser(user.id)}>Delete</Button>
-                            </td>
+                            </td> */}
                         </tr>
 
                     ))) : (
@@ -44,4 +54,9 @@ const UserTable = (props) => {
 
     )
 }
+
+// const mapStateToProps = state => ({
+//     state: state.form
+// })
+
 export default UserTable

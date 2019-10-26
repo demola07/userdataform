@@ -2,13 +2,20 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
+import { addUser } from '../actions/form';
+import { useSelector, useDispatch } from 'react-redux'
 
 
+const UserForm = () => {
+    const dispatch = useDispatch();
 
-const UserForm = (props) => {
+    const state = useSelector(state => {
+        return state;
+    });
 
     const initialFormState =
         { id: null, firstname: '', lastname: '', birthday: '', age: '', hobby: '' }
+
     const [user, setUser] = useState(initialFormState)
 
     const handleInputChange = event => {
@@ -17,6 +24,7 @@ const UserForm = (props) => {
     }
 
     const [alert, setAlert] = useState(false)
+
     const onSubmit = event => {
         event.preventDefault();
         if (!user.firstname || !user.lastname || !user.birthday || !user.age || !user.hobby) {
@@ -26,8 +34,8 @@ const UserForm = (props) => {
             }, 3000)
             return;
         }
-        props.addUser(user)
-        setAlert(false)
+        // props.addUser(user)
+        dispatch(addUser(user, state.form))
         setUser(initialFormState)
     }
 
