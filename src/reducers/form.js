@@ -9,13 +9,15 @@ export default function (state = initialState, action) {
     switch (type) {
         case ADD_USER:
             state.push(payload)
-            return {
+            return [
                 ...state
-            }
+            ]
         case DELETE_USER:
-            return { ...state }
+            return [
+                ...state.filter(user => user.id !== payload)
+            ]
         case EDIT_USER:
-            return { ...state }
+            return [...state]
         default:
             return state;
     }

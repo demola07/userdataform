@@ -31,9 +31,9 @@ const App = () => {
   // };
 
   //Delete User
-  const deleteUser = id => {
-    setUsers(users.filter(user => user.id !== id));
-  };
+  // const deleteUser = id => {
+  //   setUsers(users.filter(user => user.id !== id));
+  // };
 
   //Update User
   const updateUser = (id, updatedUser) => {

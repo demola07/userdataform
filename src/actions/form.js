@@ -8,8 +8,11 @@ export const addUser = (user, state) => dispatch => {
     })
 }
 
-export const deleteUser = () => dispatch => {
-
+export const deleteUser = (id) => dispatch => {
+    dispatch({
+        type: DELETE_USER,
+        payload: id
+    })
 }
 
 export const editUser = () => dispatch => {

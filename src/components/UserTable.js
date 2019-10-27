@@ -1,16 +1,21 @@
 import React, { useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
-import { shallowEqual, useSelector, useDispatch } from 'react-redux'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteUser } from '../actions/form'
+
 
 
 const UserTable = () => {
-    // const { state } = props
+    const dispatch = useDispatch()
     const state = useSelector((state) => {
         return state.form;
     });
-    console.log(state);
+
+    const removeUser = (id) => {
+        dispatch(deleteUser(id))
+    }
+
 
     return (
         <div>
@@ -35,10 +40,10 @@ const UserTable = () => {
                             <td>{data.birthday}</td>
                             <td>{data.age}</td>
                             <td>{data.hobby}</td>
-                            {/* <td>
-                                <Button variant="outline-primary" onClick={() => { props.editRow(user) }} className='mr-3'>Edit</Button>
-                                <Button variant="outline-danger" onClick={() => props.deleteUser(user.id)}>Delete</Button>
-                            </td> */}
+                            <td>
+                                {/* <Button variant="outline-primary" onClick={() => { props.editRow(user) }} className='mr-3'>Edit</Button> */}
+                                <Button variant="outline-danger" onClick={() => removeUser(data.id)} >Delete</Button>
+                            </td>
                         </tr>
 
                     ))) : (
