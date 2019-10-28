@@ -11,7 +11,6 @@ const UserTable = () => {
     const state = useSelector((state) => {
         return state.form;
     });
-    console.log(state);
 
 
     const removeUser = (id) => {
@@ -20,10 +19,7 @@ const UserTable = () => {
 
     const editUserData = (user) => {
         dispatch(editUser(user))
-        console.log(user);
-
     }
-
 
     return (
         <div>
@@ -68,8 +64,5 @@ const UserTable = () => {
     )
 }
 
-// const mapStateToProps = state => ({
-//     state: state.form
-// })
 
 export default UserTable

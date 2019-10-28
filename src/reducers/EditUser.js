@@ -1,4 +1,4 @@
-import { EDIT_USER } from '../actions/types'
+import { EDIT_USER, CANCEL_EDIT } from '../actions/types'
 
 const edit = { edit: false }
 
@@ -9,6 +9,11 @@ export default function (state = edit, action) {
             return {
                 ...state,
                 edit: true
+            }
+        case CANCEL_EDIT:
+            return {
+                ...state,
+                edit: false
             }
         default:
             return state;

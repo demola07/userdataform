@@ -2,31 +2,32 @@ import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux'
-import { editUser, updateUser } from '../actions/form'
+import { updateUser, cancelEdit } from '../actions/form'
 
 const EditUserForm = () => {
     const dispatch = useDispatch()
     const state = useSelector(state => { return state })
 
+    const [user, setUser] = useState(state.updateuserdata)
 
-    const [user, setUser] = useState(state.updateform)
 
     useEffect(() => {
-        setUser(state.updateform)
-    }, [state.updateform])
+        setUser(state.updateuserdata)
+    }, [state.updateuserdata])
 
     const handleInputChange = event => {
         const { name, value } = event.target
         setUser({ ...user, [name]: value })
     }
+
     const onSubmit = event => {
         event.preventDefault()
-        // props.updateUser(user.id, user)
-        dispatch(updateUser(user.id, user))
+        dispatch(cancelEdit())
+        dispatch(updateUser(user))
     }
 
-    const editUserData = () => {
-        dispatch(editUser())
+    const cancelEditButton = () => {
+        dispatch(cancelEdit())
     }
 
     return (
@@ -54,7 +55,7 @@ const EditUserForm = () => {
                     <Form.Control type="text" name='hobby' value={user.hobby} onChange={handleInputChange} />
                 </Form.Group>
                 <Button type='submit' variant="success" className='mr-3'>Update User</Button>
-                <Button variant="success" onClick={() => editUserData()}>Cancel</Button>
+                <Button variant="success" onClick={() => cancelEditButton()}>Cancel</Button>
             </Form>
         </div>
     )

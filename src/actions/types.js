@@ -3,3 +3,4 @@ export const EDIT_USER = 'EDIT_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
+export const CANCEL_EDIT = 'CANCEL_EDIT';
