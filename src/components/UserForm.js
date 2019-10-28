@@ -34,7 +34,7 @@ const UserForm = () => {
             }, 3000)
             return;
         }
-        // props.addUser(user)
+
         dispatch(addUser(user, state.form))
         setUser(initialFormState)
     }

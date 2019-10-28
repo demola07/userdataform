@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteUser } from '../actions/form'
+import { deleteUser, editUser } from '../actions/form'
 
 
 
@@ -11,9 +11,17 @@ const UserTable = () => {
     const state = useSelector((state) => {
         return state.form;
     });
+    console.log(state);
+
 
     const removeUser = (id) => {
         dispatch(deleteUser(id))
+    }
+
+    const editUserData = (user) => {
+        dispatch(editUser(user))
+        console.log(user);
+
     }
 
 
@@ -41,7 +49,7 @@ const UserTable = () => {
                             <td>{data.age}</td>
                             <td>{data.hobby}</td>
                             <td>
-                                {/* <Button variant="outline-primary" onClick={() => { props.editRow(user) }} className='mr-3'>Edit</Button> */}
+                                <Button variant="outline-primary" onClick={() => editUserData(data)} className='mr-3'>Edit</Button>
                                 <Button variant="outline-danger" onClick={() => removeUser(data.id)} >Delete</Button>
                             </td>
                         </tr>

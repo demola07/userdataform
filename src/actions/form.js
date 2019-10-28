@@ -1,4 +1,4 @@
-import { ADD_USER, EDIT_USER, DELETE_USER } from './types';
+import { ADD_USER, EDIT_USER, DELETE_USER, UPDATE_USER, UPDATE_USER_DATA } from './types';
 
 export const addUser = (user, state) => dispatch => {
     user.id = state.length + 1
@@ -15,6 +15,21 @@ export const deleteUser = (id) => dispatch => {
     })
 }
 
-export const editUser = () => dispatch => {
+export const editUser = (user) => dispatch => {
+    dispatch({
+        type: EDIT_USER
+    })
+    dispatch({
+        type: UPDATE_USER_DATA,
+        payload: user
+    })
+}
+
+export const updateUser = (id, user) => dispatch => {
+    dispatch({
+        type: UPDATE_USER,
+        payload1: id,
+        payload2: user
+    })
 
 }

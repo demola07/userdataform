@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -6,21 +6,29 @@ import './App.css';
 import UserForm from './components/UserForm';
 import UserTable from './components/UserTable';
 import EditUserForm from './components/EditUserForm';
-
 import { Provider } from 'react-redux'
 import store from './store'
 
+
+
 const App = () => {
 
-  //Data
-  const usersData = [];
+  // const state = useSelector(state => { return state })
+  const state = store.getState();
+  console.log(state.edit);
+  console.log(state);
 
-  const initialFormState = { id: null, firstname: '', lastname: '', birthday: '', age: '', hobby: '' };
+
+
+  //Data
+  // const usersData = [];
+
+  // const initialFormState = { id: null, firstname: '', lastname: '', birthday: '', age: '', hobby: '' };
 
   //setting state
-  const [users, setUsers] = useState(usersData);
-  const [editing, setEditing] = useState(false);
-  const [currentUser, setCurrentUser] = useState(initialFormState);
+  // const [users, setUsers] = useState(usersData);
+  // const [editing, setEditing] = useState(false);
+  // const [currentUser, setCurrentUser] = useState(initialFormState);
 
 
   //CRUD operations
@@ -36,27 +44,27 @@ const App = () => {
   // };
 
   //Update User
-  const updateUser = (id, updatedUser) => {
-    setEditing(false)
+  // const updateUser = (id, updatedUser) => {
+  //   setEditing(false)
 
-    setUsers(users.map(user => (user.id === id ? updatedUser : user)));
-  };
+  //   setUsers(users.map(user => (user.id === id ? updatedUser : user)));
+  // };
 
-  const editRow = user => {
-    setEditing(true);
+  // const editRow = user => {
+  //   setEditing(true);
 
-    setCurrentUser({ id: user.id, firstname: user.firstname, lastname: user.lastname, birthday: user.birthday, age: user.age, hobby: user.hobby });
-  }
+  //   setCurrentUser({ id: user.id, firstname: user.firstname, lastname: user.lastname, birthday: user.birthday, age: user.age, hobby: user.hobby });
+  // }
 
   return (
     <Provider store={store}>
       <Container fluid >
         <Row className='row'>
           {
-            editing ? (
+            state.edit.edit ? (
               <Fragment>
                 <Col xs={4} className='form' >
-                  <EditUserForm editing={editing} setEditing={setEditing} currentUser={currentUser} updateUser={updateUser}></EditUserForm>
+                  <EditUserForm ></EditUserForm>
                 </Col>
               </Fragment>
 

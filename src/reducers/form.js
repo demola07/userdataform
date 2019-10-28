@@ -1,4 +1,4 @@
-import { ADD_USER, EDIT_USER, DELETE_USER } from '../actions/types';
+import { ADD_USER, DELETE_USER } from '../actions/types';
 
 const initialState = [{ id: 1, firstname: 'Payton', lastname: 'Sawyer', birthday: '2011-23-43', age: '23', hobby: 'boxing' },
 { id: 2, firstname: 'lucas', lastname: 'scott', birthday: '1992-28-02', age: '34', hobby: 'reading' },
@@ -16,8 +16,6 @@ export default function (state = initialState, action) {
             return [
                 ...state.filter(user => user.id !== payload)
             ]
-        case EDIT_USER:
-            return [...state]
         default:
             return state;
     }
