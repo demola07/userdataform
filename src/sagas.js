@@ -1,25 +1,53 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects'
-import { fetchData } from './api'
-import { REQUEST_USER_DATA } from './actions/types'
+import { call, put, take, takeEvery, takeLatest, fork } from 'redux-saga/effects'
+import { eventChannel } from 'redux-saga'
+import firebase from 'firebase'
+import { userData } from './api'
+import { SEND_USER_DATA } from './actions/types'
 import { receiveUserData } from './actions/form'
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
-function* userData(action) {
+var firebaseConfig = {
+    apiKey: "AIzaSyCN3QtZOBUJNouRn-gq9EgqQ-yBzGhkhLU",
+    authDomain: "userdataform-8c680.firebaseapp.com",
+    databaseURL: "https://userdataform-8c680.firebaseio.com",
+    projectId: "userdataform-8c680",
+    storageBucket: "userdataform-8c680.appspot.com",
+    messagingSenderId: "705894058240",
+    appId: "1:705894058240:web:d9df93ddd65b7471c0cbe5"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database()
+
+
+
+function* sendData() {
     try {
-        const data = yield call(fetchData);
-        yield put(receiveUserData(data));
+        const action = yield take(SEND_USER_DATA);
+        const user = action.payload
+
+        yield call(userData, user);
     } catch (e) {
         console.log(e)
     }
 }
+function* startListener() {
+    const channel = new eventChannel(emiter => {
+        const listener = database.ref("entries").on("value", snapshot => {
+            emiter({ data: snapshot.val() || {} });
+        });
 
-/*
-  Alternatively you may use takeLatest.
+        return () => {
+            listener.off();
+        };
+    });
+    while (true) {
+        const { data } = yield take(channel);
 
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
-export default function* mySaga() {
-    yield takeLatest(REQUEST_USER_DATA, userData);
+        yield put(receiveUserData(data));
+    }
+}
+
+export default function* root() {
+    yield fork(startListener);
+    yield fork(sendData)
 }

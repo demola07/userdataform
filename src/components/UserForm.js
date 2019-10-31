@@ -2,19 +2,15 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
-// import { addUser } from '../actions/form';
-import { useSelector, useDispatch } from 'react-redux'
+import { sendUserData } from '../actions/form'
+import { useDispatch } from 'react-redux'
 
 
 const UserForm = () => {
     const dispatch = useDispatch();
 
-    const state = useSelector(state => {
-        return state;
-    });
-
     const initialFormState =
-        { id: null, firstname: '', lastname: '', birthday: '', age: '', hobby: '' }
+        { firstname: '', lastname: '', birthday: '', age: '', hobby: '' }
 
     const [user, setUser] = useState(initialFormState)
 
@@ -35,7 +31,8 @@ const UserForm = () => {
             return;
         }
 
-        // dispatch(addUser(user, state.form))
+        dispatch(sendUserData(user))
+        console.log(user);
         setUser(initialFormState)
     }
 

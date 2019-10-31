@@ -1,10 +1,21 @@
-export const fetchData = async () => {
+import axios from 'axios'
+
+export const userData = async (data) => {
+    const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    };
     try {
-        const response = await fetch('https://us-central1-userformfunc.cloudfunctions.net/entries')
-        const data = await response.json()
-        return data;
+
+
+        await axios.post('https://us-central1-userdataform-8c680.cloudfunctions.net/entries', data, config)
+            .then((res) => {
+                console.log('successful');
+            }).catch((err) => {
+                console.error(err);
+            })
     } catch (error) {
         console.log(error)
     }
-
 }
