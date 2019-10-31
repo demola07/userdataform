@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Alert from 'react-bootstrap/Alert'
-import { addUser } from '../actions/form';
+// import { addUser } from '../actions/form';
 import { useSelector, useDispatch } from 'react-redux'
 
 
@@ -35,7 +35,7 @@ const UserForm = () => {
             return;
         }
 
-        dispatch(addUser(user, state.form))
+        // dispatch(addUser(user, state.form))
         setUser(initialFormState)
     }
 

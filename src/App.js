@@ -17,7 +17,11 @@ const App = () => {
 
     <Container fluid >
       <Row className='row'>
-        {
+
+        <Col xs={4} className='form' >
+          <UserForm ></UserForm>
+        </Col>
+        {/* {
           state.edit ? (
             <Fragment>
               <Col xs={4} className='form' >
@@ -34,7 +38,7 @@ const App = () => {
               </Fragment>
 
             )
-        }
+        } */}
 
         <Col xs={8} className='table'>
           <UserTable></UserTable>
