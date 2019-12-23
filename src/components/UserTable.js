@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Table from 'react-bootstrap/Table'
-// import Button from 'react-bootstrap/Button'
-import { useSelector } from 'react-redux'
+import Button from 'react-bootstrap/Button'
+import { useSelector, useDispatch } from 'react-redux'
 
 
 
@@ -11,6 +11,12 @@ const UserTable = () => {
     const state = useSelector((state) => {
         return state.data;
     });
+
+    console.log(state);
+    console.log(state.length);
+
+
+
 
 
     return (

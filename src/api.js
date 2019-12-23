@@ -6,6 +6,7 @@ export const userData = async (data) => {
             "Content-type": "application/json"
         }
     };
+    console.log(data);
     try {
 
 
